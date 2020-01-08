@@ -1,0 +1,11 @@
+.cardlist{
+    margin: 20px auto;
+}
+
+ul{
+    list-style-type: none;
+}
+
+ul li{
+    font-weight: bold;
+}
