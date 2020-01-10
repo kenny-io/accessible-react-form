@@ -26,7 +26,6 @@ class Contact extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.setState({submitted: true})
-        console.log(this.state.dateOfBirth)
     }
 
     handleChange = (event) => {
@@ -45,11 +44,11 @@ class Contact extends Component {
     }
 
     handleClose = (e) => {
-        e.preventDefault();
         this.setState({  
             userName: '', phoneNumber: '', userArea: '', userAddress: '', userCity: '', userState: '',
-            zipCode: '', userEmail: '', dateOfBirth: '', submitted : false
+            zipCode: '', userEmail: '', dateOfBirth: '', DOB: '', submitted : false
         })
+        window.location.reload();
     }
 
     render() {
@@ -67,11 +66,12 @@ class Contact extends Component {
                     {/* input box for name */}
                     <Combobox className="form-group form-row">
                         <div className="col-1 text-center">
-                        <label className="col-form-label" aria-label="name"><MdPermIdentity /></label>
+                        <label for="userName" className="col-form-label"><MdPermIdentity /></label>
                         </div>
                         <div className="col-11">
-                        <ComboboxInput className="form-control" 
-                                        aria-labelledby="name" 
+                        <ComboboxInput className="form-control"
+                                        id="userName" 
+                                        aria-label="user name" 
                                         name="userName" 
                                         value={this.state.userName}
                                         placeholder="Name" 
@@ -83,11 +83,12 @@ class Contact extends Component {
                     {/*input box for phone number and area */}
                     <div className="form-group form-row">   
                         <div className="col-1 text-center" aria-label="phone">
-                        <label className="col-form-label"><MdPhone /></label>
+                        <label for="phoneNumber" className="col-form-label"><MdPhone /></label>
                         </div>
                             <Combobox className="col-6">
                                 <ComboboxInput  className="form-control" 
-                                                aria-labelledby="name" 
+                                                id="phoneNumber"
+                                                aria-label="user phone number" 
                                                 name="phoneNumber" 
                                                 value={this.state.phoneNumber} 
                                                 placeholder="Phone" 
@@ -96,7 +97,7 @@ class Contact extends Component {
                             </Combobox>
                         <div className="col-5">
                             <Menu>
-                                <MenuButton>{(this.state.userArea == '') ? ('Area') : (this.state.userArea)} <span aria-hidden><MdExpandMore /></span></MenuButton>
+                                <MenuButton aria-label="menu button for area">{(this.state.userArea == '') ? ('Area') : (this.state.userArea)} <span aria-hidden><MdExpandMore /></span></MenuButton>
                                 <MenuList> 
                                     <MenuItem onSelect={() => this.handleSelect('Ajah', 'userArea' )}>Ajah</MenuItem>
                                     <MenuItem onSelect={() => this.handleSelect('Apapa', 'userArea' )}>Apapa</MenuItem>
@@ -109,12 +110,13 @@ class Contact extends Component {
                         </div>
                     </div>
                     <Combobox className="form-group form-row">
-                        <div className="col-1 text-center" aria-label="address">
-                        <label className="col-form-label"><MdLocationOn /></label>
+                        <div className="col-1 text-center">
+                        <label for="userAddress" className="col-form-label"><MdLocationOn /></label>
                         </div>
                         <div className="col-11">
-                        <ComboboxInput  className="form-control" 
-                                        aria-labelledby="address" 
+                        <ComboboxInput  className="form-control"
+                                        id="userAddress"
+                                        aria-label="user house address" 
                                         name="userAddress" 
                                         value={this.state.userAddress} 
                                         placeholder="Address" 
@@ -123,12 +125,13 @@ class Contact extends Component {
                         </div>
                     </Combobox>
                     <Combobox className="form-group form-row">
-                        <div className="col-1 text-center" aria-label="city">
-                        <label className="col-form-label"></label>
+                        <div className="col-1 text-center">
+                        <label for="userCity" className="col-form-label"></label>
                         </div>
                         <div className="col-11">
                         <ComboboxInput  className="form-control" 
-                                        aria-labelledby="city" 
+                                        id="userCity"
+                                        aria-label="user city" 
                                         name="userCity" 
                                         value={this.state.userCity} 
                                         placeholder="City" 
@@ -140,7 +143,10 @@ class Contact extends Component {
                         <div className="col-1"></div>
                         <div className="col-6">
                             <Menu>
-                                <MenuButton>{(this.state.userState == '') ? ('State') : (this.state.userState)} <span aria-hidden><MdExpandMore /></span></MenuButton>
+                                <MenuButton aria-label="menu button for state">
+                                    {(this.state.userState == '') ? ('State') : (this.state.userState)} 
+                                    <span aria-hidden><MdExpandMore /></span>
+                                </MenuButton>
                                 <MenuList>
                                     <MenuItem onSelect={() => this.handleSelect('Abuja', 'userState' )}>Abuja</MenuItem>
                                     <MenuItem onSelect={() => this.handleSelect('Enugu', 'userState' )}>Enugu</MenuItem>
@@ -153,22 +159,23 @@ class Contact extends Component {
                         <div className="col-5">
                             <Combobox>
                                 <ComboboxInput  className="form-control" 
-                                                aria-label="Zip Code" 
+                                                aria-label="user zip code" 
                                                 name="zipCode" 
                                                 value={this.state.zipCode} 
-                                                placeholder="Zip" 
+                                                placeholder="Zip Code" 
                                                 onChange={this.handleChange}
                                 />
                             </Combobox>
                         </div>
                     </div>
                     <Combobox className="form-group form-row">
-                        <div className="col-1 text-center" aria-label="email">
-                        <label className="col-form-label"><MdEmail /></label>
+                        <div className="col-1 text-center">
+                        <label for="userEmail" className="col-form-label"><MdEmail /></label>
                         </div>
                         <div className="col-11">
                             <ComboboxInput  className="form-control" 
-                                            aria-label="email" 
+                                            id="userEmail"
+                                            aria-label="user email address" 
                                             name="userEmail" 
                                             value={this.state.userEmail} 
                                             placeholder="Email" 
@@ -177,19 +184,21 @@ class Contact extends Component {
                         </div>
                     </Combobox>
                     <div className="form-group form-row">
-                        <div className="col-1 text-center" aria-label="birthday">
-                            <label className="col-form-label"><MdEvent /></label>
+                        <div className="col-1 text-center">
+                            <label for="userBirthday" className="col-form-label"><MdEvent /></label>
                         </div>
                         <div className="col-11 datepicker">
                             <DatePicker 
-                                className="form-control" aria-label="birthday" 
+                                className="form-control" 
+                                id="userBirthday"
+                                aria-label="user birthday date" 
                                 placeholderText="Birthday"
                                 selected= {this.state.DOB}
                                 onChange = {this.handleDateOfBirth}
                             />
                         </div>
                     </div>
-                    <button className="btn btn-block" style={{border:'1px solid rebeccapurple', borderRadius:'5px'}} type="submit">Submit</button>
+                    <button className="btn btn-block" style={{border:'1px solid rebeccapurple', borderRadius:'5px'}} type="submit" aria-label="submit button" >Submit</button>
                 </form>
 
                 {

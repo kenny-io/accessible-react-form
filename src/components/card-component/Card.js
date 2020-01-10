@@ -10,12 +10,12 @@ function Card (props) {
             <div className="col-md-6 col-sm-10">
                 <h3 className="text-center">Saved Contact</h3>
                 <ul>
-                    <li>Name: {contactDetails.userName}</li>
+                    <li>Name: {contactDetails.userName.toUpperCase()}</li>
                     <li>Phone number: {contactDetails.phoneNumber}</li>
-                    <li>Area: {contactDetails.userArea}</li>
+                    <li>Area: {contactDetails.userArea.toUpperCase()}</li>
                     <li>Address: {contactDetails.userAddress}</li>
-                    <li>City: {contactDetails.userCity}</li>
-                    <li>State: {contactDetails.userState}</li>
+                    <li>City: {contactDetails.userCity.toUpperCase()}</li>
+                    <li>State: {contactDetails.userState.toUpperCase()}</li>
                     <li>Zip Code: {contactDetails.zipCode}</li>
                     <li>Email: {contactDetails.userEmail}</li>
                     <li>Date of birth: {contactDetails.dateOfBirth}</li>
